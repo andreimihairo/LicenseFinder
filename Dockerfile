@@ -43,13 +43,15 @@ RUN npm install -g bower && \
 RUN npm install -g pnpm && \
     pnpm version
 
-# install jdk 12
-RUN curl -L -o openjdk12.tar.gz https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_linux-x64_bin.tar.gz && \
-    tar xvf openjdk12.tar.gz && \
-    rm openjdk12.tar.gz && \
-    mv jdk-12.0.2 /opt/ && \
-    rm /opt/jdk-12.0.2/lib/src.zip
-ENV JAVA_HOME=/opt/jdk-12.0.2
+# install jdk 17
+RUN apt update -y
+RUN apt install curl -y
+RUN curl -L -o openjdk17.tar.gz https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz && \
+    tar xvf openjdk17.tar.gz && \
+    rm openjdk17.tar.gz && \
+    mv jdk-17.0.2 /opt/ && \
+    rm /opt/jdk-17.0.2/lib/src.zip
+ENV JAVA_HOME=/opt/jdk-17.0.2
 ENV PATH=$PATH:$JAVA_HOME/bin
 RUN java -version
 
